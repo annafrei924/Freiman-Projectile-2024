@@ -12,10 +12,9 @@ build/
 *.iws
 *.iml
 *.ipr
-out/
 .idea/
 out/
-.gradle/
+gradle/
 build/
 .DS_STORE
 !**/src/main/**/out/
