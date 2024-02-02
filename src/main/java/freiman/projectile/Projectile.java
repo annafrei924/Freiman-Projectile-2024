@@ -3,8 +3,8 @@ public class Projectile {
     private final double angle;
     private final double radians;
     private final double velocity;
-    private double seconds;
-    final double GRAVITY = 9.8;
+    private static double seconds;
+    private static final double GRAVITY = 9.8;
 
     public Projectile(double angle, double velocity) {
         this.angle = angle;
