@@ -1,4 +1,5 @@
 package freiman.projectile;
+
 public class Projectile {
     private final double angle;
     private final double radians;
@@ -35,6 +36,6 @@ public class Projectile {
      * @return the maximum height of the projectile
      */
     public double getPeakY() {
-        return (velocity*Math.sin(radians)*velocity*Math.sin(radians))/(2*GRAVITY);
+        return (velocity * Math.sin(radians) * velocity * Math.sin(radians)) / (2 * GRAVITY);
     }
 }
