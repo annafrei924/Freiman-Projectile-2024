@@ -34,6 +34,7 @@ public class ProjectileTest {
         //then
         assertEquals(1.05, actual, 0.01);
     }
+
     @Test
     public void getPeakY() {
         Projectile projectile = new Projectile(31, 65);
