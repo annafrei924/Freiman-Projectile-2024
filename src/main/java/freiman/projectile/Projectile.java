@@ -4,7 +4,7 @@ public class Projectile {
     private final double angle;
     private final double radians;
     private final double velocity;
-    private static double seconds;
+    private double seconds;
     private static final double GRAVITY = 9.8;
 
     public Projectile(double angle, double velocity) {
