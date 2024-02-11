@@ -1,6 +1,5 @@
 .gradle
 build/
-!gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
 
@@ -12,10 +11,8 @@ build/
 *.iws
 *.iml
 *.ipr
-out/
 .idea/
 out/
-.gradle/
 build/
 .DS_STORE
 !**/src/main/**/out/
