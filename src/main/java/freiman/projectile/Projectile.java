@@ -43,7 +43,7 @@ public class Projectile {
      * @return the position of the projectile when it hits the ground
      */
     public double getInterceptX() {
-        setSeconds(getApexTime()*2);
+        setSeconds(getApexTime() * 2);
         return getX();
     }
 }
