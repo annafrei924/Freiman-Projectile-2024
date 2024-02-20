@@ -38,4 +38,12 @@ public class Projectile {
     public double getPeakY() {
         return (velocity * Math.sin(radians) * velocity * Math.sin(radians)) / (2 * GRAVITY);
     }
+
+    /**
+     * @return the position of the projectile when it hits the ground
+     */
+    public double getInterceptX() {
+        double time = getApexTime() * 2;
+        return Math.cos(radians) * velocity * time;
+    }
 }
