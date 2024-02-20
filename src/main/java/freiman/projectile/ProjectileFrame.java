@@ -7,8 +7,13 @@ import java.awt.event.*;
 
 public class ProjectileFrame extends JFrame {
     private JSlider anglesSlider;
-    private JTextField velocityField, secondsField;
-    private JLabel x, y, peakY, interceptX;
+    private JTextField velocityField;
+    private JTextField secondsField;
+    private JLabel labelX;
+    private JLabel labelY;
+    private JLabel peakY;
+    private JLabel interceptX;
+
     public ProjectileFrame() {
 
         setSize(400, 600);
@@ -17,7 +22,7 @@ public class ProjectileFrame extends JFrame {
 
         setLayout(new GridLayout(8, 2));
 
-        JLabel velocityLabel= new JLabel("Velocity");
+        JLabel velocityLabel = new JLabel("Velocity");
         add(velocityLabel);
         velocityField = new JTextField();
         add(velocityField);
@@ -37,12 +42,12 @@ public class ProjectileFrame extends JFrame {
         add(secondsField);
         JLabel labelX = new JLabel("X");
         add(labelX);
-        x = new JLabel();
-        add(x);
+        labelX = new JLabel();
+        add(labelX);
         JLabel labelY = new JLabel("Y");
         add(labelY);
-        y = new JLabel();
-        add(y);
+        labelY = new JLabel();
+        add(labelY);
         JLabel peakLabelY = new JLabel("PeakY");
         add(peakLabelY);
         peakY = new JLabel();
@@ -95,8 +100,8 @@ public class ProjectileFrame extends JFrame {
                 Double.parseDouble(velocityField.getText()));
         projectile.setSeconds(Double.parseDouble(secondsField.getText()));
 
-        x.setText(Double.toString(projectile.getX()));
-        y.setText(Double.toString(projectile.getY()));
+        labelX.setText(Double.toString(projectile.getX()));
+        labelY.setText(Double.toString(projectile.getY()));
         peakY.setText(Double.toString(projectile.getPeakY()));
         interceptX.setText(Double.toString(projectile.getInterceptX()));
     }
