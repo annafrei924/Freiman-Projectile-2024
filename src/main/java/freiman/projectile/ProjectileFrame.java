@@ -6,21 +6,25 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class ProjectileFrame extends JFrame {
+    private JSlider anglesSlider;
+    private JTextField velocityField, secondsField;
+    private JLabel x, y, peakY, interceptX;
     public ProjectileFrame() {
+
         setSize(400, 600);
         setTitle("Projectile Calculator");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         setLayout(new GridLayout(8, 2));
 
-        JLabel velocityLabel = new JLabel("Velocity");
+        JLabel velocityLabel= new JLabel("Velocity");
         add(velocityLabel);
-        JTextField velocityField = new JTextField();
+        velocityField = new JTextField();
         add(velocityField);
         JLabel angleLabel = new JLabel("Angle");
         add(angleLabel);
 
-        JSlider anglesSlider = new JSlider(0, 90);
+        anglesSlider = new JSlider(0, 90);
         anglesSlider.setMajorTickSpacing(10);
         anglesSlider.setMinorTickSpacing(2);
         anglesSlider.setPaintTicks(true);
@@ -29,23 +33,23 @@ public class ProjectileFrame extends JFrame {
 
         JLabel secondsLabel = new JLabel("Seconds");
         add(secondsLabel);
-        JTextField secondsField = new JTextField();
+        secondsField = new JTextField();
         add(secondsField);
         JLabel labelX = new JLabel("X");
         add(labelX);
-        JLabel x = new JLabel();
+        x = new JLabel();
         add(x);
         JLabel labelY = new JLabel("Y");
         add(labelY);
-        JLabel y = new JLabel();
+        y = new JLabel();
         add(y);
         JLabel peakLabelY = new JLabel("PeakY");
         add(peakLabelY);
-        JLabel peakY = new JLabel();
+        peakY = new JLabel();
         add(peakY);
         JLabel interceptLabelX = new JLabel("InterceptX");
         add(interceptLabelX);
-        JLabel interceptX = new JLabel();
+        interceptX = new JLabel();
         add(interceptX);
         add(new JLabel());
 
@@ -53,8 +57,9 @@ public class ProjectileFrame extends JFrame {
         add(calculateButton);
 
         anglesSlider.addChangeListener(new ChangeListener() {
+
             public void stateChanged(ChangeEvent ce) {
-                calculate(anglesSlider, velocityField, secondsField, x, y, peakY, interceptX);
+                calculate();
             }
         });
 
@@ -62,9 +67,8 @@ public class ProjectileFrame extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                calculate(anglesSlider, velocityField, secondsField, x, y, peakY, interceptX);
+                calculate();
             }
-
 
         });
 
@@ -72,7 +76,7 @@ public class ProjectileFrame extends JFrame {
 
             @Override
             public void update(DocumentEvent e) {
-                calculate(anglesSlider, velocityField, secondsField, x, y, peakY, interceptX);
+                calculate();
             }
         });
 
@@ -80,14 +84,13 @@ public class ProjectileFrame extends JFrame {
 
             @Override
             public void update(DocumentEvent e) {
-                calculate(anglesSlider, velocityField, secondsField, x, y, peakY, interceptX);
+                calculate();
             }
         });
 
     }
 
-    private void calculate(JSlider anglesSlider, JTextField velocityField, JTextField secondsField,
-                           JLabel x, JLabel y, JLabel peakY, JLabel interceptX) {
+    private void calculate() {
         Projectile projectile = new Projectile(anglesSlider.getValue(),
                 Double.parseDouble(velocityField.getText()));
         projectile.setSeconds(Double.parseDouble(secondsField.getText()));
