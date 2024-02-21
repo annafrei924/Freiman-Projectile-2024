@@ -40,12 +40,12 @@ public class ProjectileFrame extends JFrame {
         add(secondsLabel);
         secondsField = new JTextField();
         add(secondsField);
-        JLabel labelX = new JLabel("X");
-        add(labelX);
+        JLabel titleX = new JLabel("X");
+        add(titleX);
         labelX = new JLabel();
         add(labelX);
-        JLabel labelY = new JLabel("Y");
-        add(labelY);
+        JLabel titleY = new JLabel("Y");
+        add(titleY);
         labelY = new JLabel();
         add(labelY);
         JLabel peakLabelY = new JLabel("PeakY");
