@@ -10,13 +10,21 @@ public class ProjectileGraph extends JComponent {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         g.translate(0, getHeight());
-        g.drawArc(0, (int) -projectile.getPeakY(),
-                (int) projectile.getInterceptX(), (int) projectile.getPeakY(),
-                0, 180);
+        double seconds = projectile.getSeconds();
+        projectile.setSeconds(0);
+        double prevX = projectile.getX();
+        double prevY = -projectile.getY();
+        for (int s = 0; s < seconds; s++) {
+            projectile.setSeconds(s);
+            g.drawLine((int) prevX, (int) prevY,
+                    (int) projectile.getX(), (int) -projectile.getY());
+            prevX = projectile.getX();
+            prevY = -projectile.getY();
+        }
         g.setColor(Color.BLUE);
-        g.fillOval((int) (projectile.getInterceptX()/2 - 2), (int) -projectile.getPeakY()-2, 4, 4);
+        g.fillOval((int) (projectile.getInterceptX() / 2 - 2),
+                (int) -projectile.getPeakY() - 2, 4, 4);
 
     }
 

@@ -17,6 +17,12 @@ public class Projectile {
         this.seconds = seconds;
     }
 
+    public double getSeconds()
+    {
+        return seconds;
+    }
+
+
     public double getX() {
         return Math.cos(radians) * velocity * seconds;
     }

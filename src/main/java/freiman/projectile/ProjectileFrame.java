@@ -28,7 +28,6 @@ public class ProjectileFrame extends JFrame {
         main.add(west, BorderLayout.WEST);
 
         //setting this layout only on the west JPanel
-        //west.setLayout(new GridLayout(8, 2));
         west.setLayout(new GridLayout(7, 2));
 
         JLabel velocityLabel = new JLabel("Velocity");
