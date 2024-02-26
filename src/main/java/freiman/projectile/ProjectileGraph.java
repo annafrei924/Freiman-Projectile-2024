@@ -16,7 +16,7 @@ public class ProjectileGraph extends JComponent {
         double prevY = -projectile.getY();
 
         int s = 0;
-        while(projectile.getX() < projectile.getInterceptX()) {
+        while (projectile.getX() < projectile.getInterceptX()) {
             projectile.setSeconds(s);
             g.drawLine((int) prevX, (int) prevY,
                     (int) projectile.getX(), (int) -projectile.getY());
@@ -24,6 +24,7 @@ public class ProjectileGraph extends JComponent {
             prevY = -projectile.getY();
             s++;
         }
+
         g.setColor(Color.BLUE);
         g.fillOval((int) (projectile.getInterceptX() / 2 - 2),
                 (int) -projectile.getPeakY() - 2, 4, 4);
