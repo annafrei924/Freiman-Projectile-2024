@@ -1,9 +1,7 @@
 package freiman.projectile;
 
 import javax.swing.*;
-import javax.swing.event.*;
 import java.awt.*;
-import java.awt.event.*;
 
 public class ProjectileFrame extends JFrame {
     private JSlider anglesSlider;
@@ -13,85 +11,68 @@ public class ProjectileFrame extends JFrame {
     private JLabel labelY;
     private JLabel peakY;
     private JLabel interceptX;
+    private ProjectileGraph graph;
 
     public ProjectileFrame() {
 
-        setSize(400, 600);
+        setSize(800, 600);
         setTitle("Projectile Calculator");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        setLayout(new GridLayout(8, 2));
+        JPanel main = new JPanel();
+        main.setLayout(new BorderLayout());
+        // tells the JFrame to use this JPanel
+        setContentPane(main);
+
+        JPanel west = new JPanel();
+        main.add(west, BorderLayout.WEST);
+
+        //setting this layout only on the west JPanel
+        west.setLayout(new GridLayout(7, 2));
 
         JLabel velocityLabel = new JLabel("Velocity");
-        add(velocityLabel);
+        west.add(velocityLabel);
         velocityField = new JTextField();
-        add(velocityField);
+        west.add(velocityField);
         JLabel angleLabel = new JLabel("Angle");
-        add(angleLabel);
+        west.add(angleLabel);
 
         anglesSlider = new JSlider(0, 90);
         anglesSlider.setMajorTickSpacing(10);
         anglesSlider.setMinorTickSpacing(2);
         anglesSlider.setPaintTicks(true);
         anglesSlider.setPaintLabels(true);
-        add(anglesSlider);
+        west.add(anglesSlider);
 
         JLabel secondsLabel = new JLabel("Seconds");
-        add(secondsLabel);
+        west.add(secondsLabel);
         secondsField = new JTextField();
-        add(secondsField);
+        west.add(secondsField);
         JLabel titleX = new JLabel("X");
-        add(titleX);
+        west.add(titleX);
         labelX = new JLabel();
-        add(labelX);
+        west.add(labelX);
         JLabel titleY = new JLabel("Y");
-        add(titleY);
+        west.add(titleY);
         labelY = new JLabel();
-        add(labelY);
+        west.add(labelY);
         JLabel peakLabelY = new JLabel("PeakY");
-        add(peakLabelY);
+        west.add(peakLabelY);
         peakY = new JLabel();
-        add(peakY);
+        west.add(peakY);
         JLabel interceptLabelX = new JLabel("InterceptX");
-        add(interceptLabelX);
+        west.add(interceptLabelX);
         interceptX = new JLabel();
-        add(interceptX);
-        add(new JLabel());
+        west.add(interceptX);
 
-        JButton calculateButton = new JButton("Calculate");
-        add(calculateButton);
+        anglesSlider.addChangeListener(ce -> calculate());
 
-        anglesSlider.addChangeListener(new ChangeListener() {
+        velocityField.getDocument().addDocumentListener((SimpleDocumentListener) e -> calculate());
 
-            public void stateChanged(ChangeEvent ce) {
-                calculate();
-            }
-        });
+        secondsField.getDocument().addDocumentListener((SimpleDocumentListener) e -> calculate());
 
-        calculateButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                calculate();
-            }
-
-        });
-
-        velocityField.getDocument().addDocumentListener(new SimpleDocumentListener() {
-
-            @Override
-            public void update(DocumentEvent e) {
-                calculate();
-            }
-        });
-
-        secondsField.getDocument().addDocumentListener(new SimpleDocumentListener() {
-
-            @Override
-            public void update(DocumentEvent e) {
-                calculate();
-            }
-        });
+        graph = new ProjectileGraph();
+        main.add(graph, BorderLayout.CENTER);
 
     }
 
@@ -104,6 +85,7 @@ public class ProjectileFrame extends JFrame {
         labelY.setText(Double.toString(projectile.getY()));
         peakY.setText(Double.toString(projectile.getPeakY()));
         interceptX.setText(Double.toString(projectile.getInterceptX()));
+        graph.setProjectile(projectile);
     }
 
 }
