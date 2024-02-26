@@ -16,7 +16,7 @@ public class ProjectileGraph extends JComponent {
         double prevX = projectile.getX();
         double prevY = -projectile.getY();
 
-        for (int s = 0; s <= projectile.getApexTime()*2 + 1; s++) {
+        for (int s = 0; s <= projectile.getApexTime() * 2 + 1; s++) {
             projectile.setSeconds(s);
             g.drawLine((int) prevX, (int) prevY,
                     (int) projectile.getX(), (int) -projectile.getY());
