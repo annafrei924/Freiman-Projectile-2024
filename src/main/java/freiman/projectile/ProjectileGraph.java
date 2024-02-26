@@ -12,17 +12,16 @@ public class ProjectileGraph extends JComponent {
         super.paintComponent(g);
         g.translate(0, getHeight());
 
+        projectile.setSeconds(0);
         double prevX = projectile.getX();
         double prevY = -projectile.getY();
 
-        int s = 0;
-        while (projectile.getX() < projectile.getInterceptX()) {
+        for (int s = 0; s <= projectile.getApexTime()*2 + 1; s++) {
             projectile.setSeconds(s);
             g.drawLine((int) prevX, (int) prevY,
                     (int) projectile.getX(), (int) -projectile.getY());
             prevX = projectile.getX();
             prevY = -projectile.getY();
-            s++;
         }
 
         g.setColor(Color.BLUE);
