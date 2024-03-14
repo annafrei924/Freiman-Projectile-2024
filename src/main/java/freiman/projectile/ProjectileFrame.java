@@ -36,14 +36,13 @@ public class ProjectileFrame extends JFrame {
 
         //setting this layout only on the west JPanel
         west.setLayout(new GridLayout(9, 2));
-        JLabel empty = new JLabel();
-        JLabel empty1 = new JLabel();
 
         JLabel velocityLabel = new JLabel("Velocity");
         west.add(velocityLabel);
         velocitySlider = new JSlider(0, 100, 65);
         west.add(velocitySlider);
 
+        JLabel empty = new JLabel();
         west.add(empty);
         velocityValue = new JLabel(Integer.toString(velocitySlider.getValue()));
         west.add(velocityValue);
@@ -55,7 +54,8 @@ public class ProjectileFrame extends JFrame {
         angleValue = new JLabel(String.valueOf(anglesSlider.getValue()));
         west.add(anglesSlider);
 
-        west.add(empty1);
+        empty = new JLabel();
+        west.add(empty);
         angleValue = new JLabel(Integer.toString(anglesSlider.getValue()));
         west.add(angleValue);
 

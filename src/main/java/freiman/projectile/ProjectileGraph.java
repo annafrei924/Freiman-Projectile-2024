@@ -27,8 +27,7 @@ public class ProjectileGraph extends JComponent {
         for (int x = -gridSpacing; x < getWidth(); x += gridSpacing) {
             if (x == 0) {
                 g.setColor(Color.BLACK);
-            }
-            else {
+            } else {
                 g.setColor(Color.lightGray);
             }
             g.drawLine(x, gridSpacing, x, -getHeight());
