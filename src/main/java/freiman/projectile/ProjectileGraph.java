@@ -2,20 +2,68 @@ package freiman.projectile;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.DecimalFormat;
 
 public class ProjectileGraph extends JComponent {
 
     private Projectile projectile = new Projectile(0, 0);
+    private static final DecimalFormat FORMAT = new DecimalFormat("0.00");
+
+    private final int gridSpacing = 30;
 
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.translate(0, getHeight());
 
+        super.paintComponent(g);
+
+        //set background
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, getWidth(), getHeight());
+
+
+        //grid
+        g.setColor(Color.lightGray);
+        for (int x = 0; x < getWidth(); x += gridSpacing) {
+            g.drawLine(x, 0, x, getHeight());
+        }
+        for (int y = 0; y < getHeight(); y += gridSpacing) {
+            g.drawLine(0, y, getWidth(), y);
+        }
+
+        //draw x and y axis
+        g.setColor(Color.BLACK);
+        g.drawLine(gridSpacing, 0, gridSpacing, getHeight());
+        g.drawLine(0, getHeight() - gridSpacing, getWidth(), getHeight() - gridSpacing);
+
+        g.translate(gridSpacing, getHeight() - gridSpacing);
+
+        //draws blue dot and label
+        g.setColor(Color.BLUE);
+        int peakOvalX = (int) (projectile.getInterceptX() / 2 - 4);
+        int peakOvalY = (int) -projectile.getPeakY() - 4;
+        g.fillOval(peakOvalX, peakOvalY, 8, 8);
+
+        String peak = "(" + FORMAT.format(projectile.getInterceptX() / 2) + ", "
+                + FORMAT.format(projectile.getPeakY()) + ")";
+        g.drawString(peak, peakOvalX - 40, peakOvalY - 25);
+
+        //draws red dot and label
+        g.setColor(Color.RED);
+        double seconds = projectile.getSeconds();
+        int currOvalX = (int) projectile.getX() - 4;
+        int currOvalY = (int) -projectile.getY() - 4;
+        g.fillOval(currOvalX, currOvalY, 8, 8);
+
+        String curr = "(" + FORMAT.format(projectile.getX()) + ", "
+                + FORMAT.format(projectile.getY()) + ")";
+        g.drawString(curr, currOvalX - 40, currOvalY - 10);
+
+
+        //draws the graph
+        g.setColor(Color.BLACK);
         projectile.setSeconds(0);
         double prevX = projectile.getX();
         double prevY = -projectile.getY();
-
         for (int s = 0; s <= projectile.getApexTime() * 2 + 1; s++) {
             projectile.setSeconds(s);
             g.drawLine((int) prevX, (int) prevY,
@@ -24,9 +72,8 @@ public class ProjectileGraph extends JComponent {
             prevY = -projectile.getY();
         }
 
-        g.setColor(Color.BLUE);
-        g.fillOval((int) (projectile.getInterceptX() / 2 - 2),
-                (int) -projectile.getPeakY() - 2, 4, 4);
+
+
 
     }
 
