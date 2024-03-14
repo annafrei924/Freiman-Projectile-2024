@@ -21,31 +21,27 @@ public class ProjectileGraph extends JComponent {
         g.fillRect(0, 0, getWidth(), getHeight());
 
 
-        //grid
-        g.setColor(Color.lightGray);
-        for (int x = 0; x < getWidth(); x += gridSpacing) {
-            g.drawLine(x, 0, x, getHeight());
-        }
-        for (int y = 0; y < getHeight(); y += gridSpacing) {
-            g.drawLine(0, y, getWidth(), y);
-        }
-
-        //draw x and y axis
-        g.setColor(Color.BLACK);
-        g.drawLine(gridSpacing, 0, gridSpacing, getHeight());
-        g.drawLine(0, getHeight() - gridSpacing, getWidth(), getHeight() - gridSpacing);
-
         g.translate(gridSpacing, getHeight() - gridSpacing);
 
-        //draws blue dot and label
-        g.setColor(Color.BLUE);
-        int peakOvalX = (int) (projectile.getInterceptX() / 2 - 4);
-        int peakOvalY = (int) -projectile.getPeakY() - 4;
-        g.fillOval(peakOvalX, peakOvalY, 8, 8);
-
-        String peak = "(" + FORMAT.format(projectile.getInterceptX() / 2) + ", "
-                + FORMAT.format(projectile.getPeakY()) + ")";
-        g.drawString(peak, peakOvalX - 40, peakOvalY - 25);
+        // vertical lines
+        for (int x = -gridSpacing; x < getWidth(); x += gridSpacing) {
+            if (x == 0) {
+                g.setColor(Color.BLACK);
+            }
+            else {
+                g.setColor(Color.lightGray);
+            }
+            g.drawLine(x, gridSpacing, x, -getHeight());
+        }
+        // horizontal lines
+        for (int y = gridSpacing; y >= -getHeight(); y -= gridSpacing) {
+            if (y == 0) {
+                g.setColor(Color.BLACK);
+            } else {
+                g.setColor(Color.lightGray);
+            }
+            g.drawLine(-gridSpacing, y, getWidth(), y);
+        }
 
         //draws red dot and label
         g.setColor(Color.RED);
@@ -57,7 +53,6 @@ public class ProjectileGraph extends JComponent {
         String curr = "(" + FORMAT.format(projectile.getX()) + ", "
                 + FORMAT.format(projectile.getY()) + ")";
         g.drawString(curr, currOvalX - 40, currOvalY - 10);
-
 
         //draws the graph
         g.setColor(Color.BLACK);
@@ -72,8 +67,15 @@ public class ProjectileGraph extends JComponent {
             prevY = -projectile.getY();
         }
 
+        //draws blue dot and label
+        g.setColor(Color.BLUE);
+        int peakOvalX = (int) (projectile.getInterceptX() / 2 - 4);
+        int peakOvalY = (int) -projectile.getPeakY() - 4;
+        g.fillOval(peakOvalX, peakOvalY, 8, 8);
 
-
+        String peak = "(" + FORMAT.format(projectile.getInterceptX() / 2) + ", "
+                + FORMAT.format(projectile.getPeakY()) + ")";
+        g.drawString(peak, peakOvalX - 40, peakOvalY - 25);
 
     }
 
